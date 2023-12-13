@@ -11,12 +11,20 @@ import {
   Checkbox,
   HStack,
   WarningOutlineIcon,
-  Image
+  Image,
+  Switch,
+  Text,
+  useColorMode
 } from "native-base";
 
 export default function Signin() {
+  const { colorMode, toggleColorMode } = useColorMode();
   return (
-    <Center height="full">
+    <Center
+      height="full"
+      _dark={{ bg: "black" }}
+      _light={{ bg: "white" }}
+    >
 
       <Image
         size={150}
@@ -27,7 +35,11 @@ export default function Signin() {
 
       <VStack width="full" p={5}>
         <Box width="full">
-          <Heading color="blue.400">Entrar</Heading>
+          <Heading
+            color="blue.400"
+            _dark={{ color: "white" }}
+            _light={{ color: "blue.500" }}
+          >Entrar</Heading>
 
           <FormControl isInvalid>
             <FormControl.Label>Email</FormControl.Label>
@@ -68,6 +80,18 @@ export default function Signin() {
 
         <HStack justifyContent="center">
           <Checkbox mt={5} value="agree">Concordo com a política de privacidade</Checkbox>
+        </HStack>
+
+        <HStack alignItems="center" space={4} justifyContent="center" mt={3}>
+          <Text>Dark</Text>
+          <Switch
+            isChecked={colorMode === "light"}
+            onToggle={toggleColorMode}
+            aria-label={
+              colorMode === "light" ? "Troque para o tema escuro" : "Troque para o tema claro"
+            }
+          />
+          <Text>Light</Text>
         </HStack>
       </VStack>
     </Center>
